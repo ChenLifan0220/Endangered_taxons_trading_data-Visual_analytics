@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+   <head>
+       <meta charset="utf-8">
+   </head>
+   <body style="height: 100%; margin: 0">
+       <div id="container" style="height: 100%"></div>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+       <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+       <script type="text/javascript">
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var app = {};
+option = null;
+option = {
+    title: {
+        text: 'Top 10 Taxons traded most Over Time',
+		left:'center',
+		top:10
+    },
+    tooltip : {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'cross',
+            label: {
+                backgroundColor: '#6a7985'
+            }
+        }
+    },
+    legend: {
+        data:['Python reticulatus','Alligator mississippiensis','Crocodylus niloticus','Loxodonta africana','Crocodylus porosus','Python bivittatus','Macaca fascicularis','Varanus salvator','Varanus niloticus','Caiman crocodilus fuscus','Acipenser baerii',
+		{name:'Pericopsis elata',icon:'diamond',symbol:'diamond'},'Python curtus'],
+		orient:'vertical',
+		right:5,
+		top:'30%',
+		inactiveColor:'#ccc'
+	},
+    toolbox: {
+		show:true,
+		right:10,
+		orient:'vertical',
+        feature: {
+            saveAsImage: {show: true},
+			dataView : {show: true, readOnly: false},
+            magicType : {show: true, type: ['line', 'bar']}
+        }
+    },
+    grid: {
+        left: '1%',
+        right: '15%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis : [
+        {
+            type : 'category',
+            boundaryGap : false,
+            data : ['2003','2004','2005','2006','2007','2008','2009','2010','2011','2012','2013','2014','2015','2016']
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value'
+        }
+    ],
+	<!-- color:['#,'#FDF5E6','#D06624','#F0E68C','#E1FFFF','#FF0000'], -->
+    series : [
+        {
+            name:'Python reticulatus',
+            type:'line',
+			showSymbol:false,
+			areaStyle: {normal: {}},
+			lineStyle:{
+			    normal:{
+				    width:1
+				},
+			},
+			itemStyle:{
+				normal:{
+					barBorderColor:'#B03060',
+					color:'#B03060'
+				},
+				emphasis:{
+					color:'#B03060'
+				},
+			},
+            data:[1312,1753, 2653, 2816,2588,2868,2647,2557,2583,3044,2997, 2546,2728,2834]
+        },
+        {
+            name:'Alligator mississippiensis',
+            type:'line',
+			showSymbol:false,
+			areaStyle: {normal: {}},
+			lineStyle:{
+			    normal:{
+				    width:1
+				},
+			},
+			itemStyle:{
+				normal:{
+					barBorderColor:'#2a5caa',
+					color:'#2a5caa'
+				},
+				emphasis:{
+					color:'#2a5caa'
+				},
+			},
+            data:[2350, 2744, 2977, 2962, 2860, 2785, 2607,2612,2582,2692,2907,2603,2615,2207]
+        },
+        {
+            name:'Crocodylus niloticus',
+            type:'line',
+			showSymbol:false,
+			areaStyle: {normal: {}},
+						lineStyle:{
+			    normal:{
+				    width:1
+				},
+			},
+			itemStyle:{
+				normal:{
+					barBorderColor:'#7bbfea',
+					color:'#7bbfea'
+				},
+				emphasis:{
+					color:'#7bbfea'
+				},
+			},
+            data:[1926, 2038, 2512, 2538,2607, 2903, 2663, 2704,2627,2656,2833,3037,3001,2482]
+        },
+        {
+            name:'Loxodonta africana',
+            type:'line',
+			showSymbol:false,
+			areaStyle: {normal: {}},
+            data:[1183, 1006, 1087, 1147, 1005, 1321, 1493,1633,1868,1971,1794,1507,1162,886]
+        },
+		{
+            name:'Crocodylus porosus',
+            type:'line',
+			showSymbol:false,
+			areaStyle: {normal: {}},
+			lineStyle:{
+			    normal:{
+				    width:1
+				},
+			},
+			itemStyle:{
+				normal:{
+					barBorderColor:'#2A8FBD',
+					color:'#2A8FBD'
+				},
+				emphasis:{
+					color:'#2A8FBD'
+				},
+			},
+            data:[847,891,1026,1018,1175,1355,1409,1456,1401,1632,1589,1712,1537,1470]
+        },
+		{
+            name:'Python bivittatus',
+            type:'line',
+			showSymbol:false,
+			areaStyle: {normal: {}},
+			lineStyle:{
+			    normal:{
+				    width:1
+				},
+			},
+			itemStyle:{
+				normal:{
+					barBorderColor:'#DB7093',
+					color:'#DB7093'
+				},
+				emphasis:{
+					color:'#DB7093'
+				},
+			},
+            data:[null, 775,770,790,745,905,884,1002,1055,1431,1355,1176,966,null]
+        },
+		{
+            name:'Macaca fascicularis',
+            type:'line',
+			showSymbol:false,
+			areaStyle: {normal: {}},
+            data:[null,null,731,735,784,868,998,889,988,1029,987,865,824,837]
+        },
+		{
+            name:'Varanus salvator',
+            type:'line',
+			showSymbol:false,
+			areaStyle: {normal: {}},
+			lineStyle:{
+			    normal:{
+				    width:1
+				},
+			},
+			itemStyle:{
+				normal:{
+					barBorderColor:'#FFEF61',
+					color:'#FFEF61'
+				},
+				emphasis:{
+					color:'#FFEF61'
+				},
+			},
+            data:[651,693,966,896,960,984,926,878,960,969,1061,982,1030,975]
+        },
+				{
+            name:'Varanus niloticus',
+            type:'line',
+			showSymbol:false,
+			areaStyle: {normal: {}},
+			lineStyle:{
+			    normal:{
+				    width:1
+				},
+			},
+			itemStyle:{
+				normal:{
+					barBorderColor:'#fdb933',
+					color:'#fdb933'
+				},
+				emphasis:{
+					color:'#fdb933'
+				},
+			},
+            data:[1189,1339,1509,1322,1366,1156,995,1174,994,947,875,857,870,755]
+        },
+				{
+            name:'Caiman crocodilus fuscus',
+            type:'line',
+			showSymbol:false,
+			areaStyle: {normal: {}},
+			lineStyle:{
+			    normal:{
+				    width:1
+				},
+			},
+			itemStyle:{
+				normal:{
+					barBorderColor:'#06B9D1',
+					color:'#06B9D1'
+				},
+				emphasis:{
+					color:'#06B9D1'
+				},
+			},
+            data:[967, 1047,1148,1143,1163,1087,969,985,1011,925,940,907,null,null]
+        },
+		{
+            name:'Acipenser baerii',
+            type:'line',
+			showSymbol:true,
+			areaStyle: {normal: {}},
+			lineStyle:{
+			    normal:{
+				    width:1
+				},
+			},
+			itemStyle:{
+				normal:{
+					barBorderColor:'#7DB9DE',
+					color:'#7DB9DE'
+				},
+				emphasis:{
+					color:'#7DB9DE'
+				},
+			},
+            data:[null,null,null,null,null,null,null,null,null,null,null,null,939,919]
+        },
+		{
+            name:'Pericopsis elata',
+            type:'line',
+			showSymbol:true,
+			areaStyle: {normal: {}},
+			lineStyle:{
+			    normal:{
+				    width:1
+				},
+			},
+			itemStyle:{
+				normal:{
+					barBorderColor:'#2E8B57',
+					color:'#2E8B57'
+				},
+				emphasis:{
+					color:'#2E8B57'
+				},
+			},
+            data:[743,null,null,null,null,null,null,null,null,null,null,null,null,null],
+        },
+		{
+            name:'Python curtus',
+            type:'line',
+			showSymbol:true,
+			areaStyle: {normal: {}},
+			lineStyle:{
+			    normal:{
+				    width:1
+				},
+			},
+			itemStyle:{
+				normal:{
+					barBorderColor:'#F2B0AC',
+					color:'#F2B0AC'
+				},
+				emphasis:{
+					color:'#F2B0AC'
+				},
+			},
+            data:[701, 805,null,905,null,null,null,null,null,null,null,null,null,null]
+        }
+    ]
+};
+;
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+};
+myChart.on('click', function (params) {
+   if (params.componentType === 'series') {
+   //alert(option.series[0].name);
+   var clickIndex=params.seriesIndex;
+             window.open('https://en.wikipedia.org/wiki/' + encodeURIComponent(option.series[clickIndex].name));
+            }
+});
+       </script>
+   </body>
+</html>

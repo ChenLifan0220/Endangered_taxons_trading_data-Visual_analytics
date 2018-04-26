@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Visualization of Endangered Animals Trading Data</title>
+    <!-- for-mobile-apps -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Best Bakery Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+    Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+            function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- //for-mobile-apps -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/static/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- js -->
+    <script src="/static/js/jquery-1.11.1.min.js"></script>
+    <script src="/static/echarts.min.js"></script>
+    <!-- //js -->
+    <!-- animation-effect -->
+    <link href="/static/css/animate.min.css" rel="stylesheet">
+    <script src="/static/js/wow.min.js"></script>
+    <script>
+     new WOW().init();
+    </script>
+    <!-- //animation-effect -->
+    <link href='https://fonts.googleapis.com/css?family=Oleo+Script:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+    <!-- start-smooth-scrolling -->
+    <script type="text/javascript" src="/static/js/move-top.js"></script>
+    <script type="text/javascript" src="/static/js/easing.js"></script>
+    <!--Step:2 Import echarts.js-->
+    <script type="text/javascript" src="/static/js/jquery-1.8.0.js"></script>
+    <script src="/static/js/echarts.js" charset="UTF-8"></script>
+{#    <script type="text/javascript" src="/static/js/echarts.js"></script>#}
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $(".scroll").click(function(event){
+                event.preventDefault();
+                $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+            });
+        });
+    </script>
+    <!-- start-smooth-scrolling -->
+    <style>
+        #container{
+                border:0px solid grey;
+                width:100%px;
+                height:515px;
+                margin-top:85px;
+                margin-left:15px;
+                padding-left:15px;
+                position:relative;
+                background:#F5F5F5;
+                z-index:-3;
+                line-height:30px;
+                text-align:center;
+                font-family:Microsoft Yahei;
+                font-size:12px;
+            }
+        .box{
+            width:80px;
+            line-height:30px;
+            text-align:center;
+            font-family:Microsoft Yahei;
+            font-size:12px;
+            color:white;
+            margin:0 0px;
+            position:absolute;
+            display: inline;
+            vertical-align: baseline;
+            outline: none;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            font: 14px/100% Arial, Helvetica, sans-serif;
+            padding: .3em .3em .3em;
+            text-shadow: 0 1px 1px rgba(0,0,0,.3);
+            -webkit-border-radius: .5em;
+            -moz-border-radius: .5em;
+            border-radius: .5em;
+            -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+            -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+            box-shadow: 0 1px 2px rgba(0,0,0,.2);
+        }
+        .bt{
+            position:absolute;
+            top:45px;
+            right:50px;
+            display: inline-block;
+        }
+        .headfont{
+            position:absolute;
+            top:15px;
+            left:50px;
+            vertical-align: baseline;
+            font-size: 2em;
+        }
+        .Top3{
+            position:absolute;
+            right:9px;
+            top:110px;
+            width:440px;
+            height:515px;
+            z-index: -2;
+            opacity:0.3;
+            background:gray;
+        }
+        .Sort {
+            color: #d9eef7;
+            border: solid 1px #0076a3;
+            background: #3CB371;
+            background: -webkit-gradient(linear, left top, left bottom, from(#DCDCDC), to(#DCDCDC));
+            background: -moz-linear-gradient(top, #DCDCDC, #DCDCDC);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00adee', endColorstr='#0078a5');
+        }
+        .PreY{
+            color: #d9eef7;
+            border: solid 1px #0076a3;
+            background: #0095cd;
+            background: -webkit-gradient(linear, left top, left bottom, from(#00adee), to(#0078a5));
+            background: -moz-linear-gradient(top,  #00adee,  #0078a5);
+            filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#00adee', endColorstr='#0078a5');
+        }
+        .PostY{
+            color: #d9eef7;
+            border: solid 1px #0076a3;
+            background: #DC143C;
+            background: -webkit-gradient(linear, left top, left bottom, from(#FFA500), to(#FFA500));
+            background: -moz-linear-gradient(top,  #FFA500,  #FFA500);
+            filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#00adee', endColorstr='#0078a5');
+        }
+        .Sort{
+            color: #d9eef7;
+            border: solid 1px #0076a3;
+            background: #3CB371;
+            background: -webkit-gradient(linear, left top, left bottom, from(#DCDCDC), to(#DCDCDC));
+            background: -moz-linear-gradient(top,  #DCDCDC,  #DCDCDC);
+            filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#00adee', endColorstr='#0078a5');
+        }
+    </style>
+</head>
+	
+<body>
+<!-- banner -->
+	<div class="banner-figures">
+		<div class="banner">
+			<div class="container banner-drop">
+				<div class="header">
+					<div class="header-left">
+						<ul>
+							<li class="animated wow fadeInLeftBig" data-wow-duration="1200ms" data-wow-delay="800ms"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> HKU, Hong Kong </li>
+							<li class="animated wow fadeInLeftBig" data-wow-duration="1200ms" data-wow-delay="900ms"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> +6819 1825 </li>
+							<li class="animated wow fadeInLeftBig" data-wow-duration="1200ms" data-wow-delay="1000ms"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <a href="mailto:karmen3@connect.hku.hk">karmen3@connect.hku.hk</a></li>
+						</ul>
+					</div>
+					<div class="header-right">
+						<nav>
+						  <ul>
+							<li class="active">
+								<a href="index.html"><i class="glyphicon glyphicon-home" aria-hidden="true"></i><span>Home</span></a>
+							</li>
+						  </ul>
+						</nav>
+						<div class="menu-icon animated wow zoomIn" data-wow-duration="1000ms" data-wow-delay="800ms"><span></span></div>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+				<div class="logo animated wow bounceInDown" data-wow-duration="1000ms" data-wow-delay="500ms">
+					<h1><a href="index.html"><span>Group I</span>Visualization of endangered animals trading data</a></h1>
+				</div>
+				<div class="social-icons animated wow bounceInDown" data-wow-duration="1000ms" data-wow-delay="800ms">
+                    <a></a>
+                    <a></a>
+                    <a></a><a></a><a></a>
+                                        <li></li>
+				</div>
+			</div>
+		</div>
+			<script>
+				(function($){
+				  $(".menu-icon").on("click", function(){
+						$(this).toggleClass("open");
+						$(".container").toggleClass("nav-open");
+						$("nav ul li").toggleClass("animate");
+				  });
+				})(jQuery);
+			</script>
+	</div>
+<!-- //banner -->
+<!-- banner-bottom -->
+
+
+<div class="team" >
+  <div class="container" data-wow-duration="1000ms" data-wow-delay="800ms">
+   <h3>Meet Our <span>Team</span></h3>
+   <div class="team-grids">
+    <div class="col-md-4 team-grid animated wow bounceInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
+     <div class="team-grid1 hover14 column">
+      <div>
+       <figure><img src="/static/images/18.jpg" alt=" " class="img-responsive" /></figure>
+      </div>
+     </div>
+     <div class="team-grid1-sub">
+      <h4>Chen Jiawen</h4>
+      <p>3035419389</p >
+         <p>Wild animals belong in the wild.</p >
+      <div class="social-icons social-icons1">
+      </div>
+     </div>
+    </div>
+
+    <div class="col-md-4 team-grid animated wow bounceInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
+     <div class="team-grid1 hover14 column">
+      <div>
+       <figure><img src="/static/images/16.jpg" alt=" " class="img-responsive" /></figure>
+      </div>
+     </div>
+     <div class="team-grid1-sub">
+      <h4>Chen Lifan</h4>
+      <p>3035419171</p >
+         <p>It's time to speak for those who can't.</p >
+      <div class="social-icons social-icons1">
+      </div>
+     </div>
+    </div>
+
+    <div class="col-md-4 team-grid animated wow bounceInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
+      <div style="width:280.33px;height:384px;backgound:white">
+
+     </div>
+
+    </div>
+       <div class="team-grids">
+
+    <div class="col-md-4 team-grid animated wow bounceInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
+     <div style="width:280.33px;height:384px;backgound:white">
+
+     </div>
+    </div>
+
+    <div class="col-md-4 team-grid animated wow bounceInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
+     <div class="team-grid1 hover14 column">
+      <div>
+       <figure><img src="/static/images/17.jpg" alt=" " class="img-responsive" /></figure>
+      </div>
+     </div>
+     <div class="team-grid1-sub">
+      <h4>Cui Yitong</h4>
+      <p>3035418581</p >
+         <p>They need their fur more than we do.</p >
+      <div class="social-icons social-icons1">
+      </div>
+     </div>
+    </div>
+
+    <div class="col-md-4 team-grid animated wow bounceInRight" data-wow-duration="1000ms" data-wow-delay="500ms">
+     <div class="team-grid1 hover14 column">
+      <div>
+       <figure><img src="/static/images/19.jpg" alt=" " class="img-responsive" /></figure>
+      </div>
+     </div>
+     <div class="team-grid1-sub">
+      <h4>Zhang Sijing</h4>
+      <p>3035419456</p >
+         <p>They can't live without their fur.</p >
+      <div class="social-icons social-icons1">
+      </div>
+     </div>
+    </div>
+    <div class="clearfix"></div>
+   </div>
+  </div>
+ </div>
+
+
+	<div class="banner-bottom animated wow lightSpeedIn" data-wow-duration="1500ms" data-wow-delay="800ms">
+{#		<ul id="flexiselDemo1">#}
+{#		</ul>#}
+			<script type="text/javascript">
+				$(window).load(function() {
+				$("#flexiselDemo1").flexisel({
+					visibleItems: 4,
+					animationSpeed: 1000,
+					autoPlay: true,
+					autoPlaySpeed: 3000,    		
+					pauseOnHover: true,
+					enableResponsiveBreakpoints: true,
+					responsiveBreakpoints: { 
+						portrait: { 
+							changePoint:480,
+							visibleItems: 1
+						}, 
+						landscape: { 
+							changePoint:640,
+							visibleItems: 2
+						},
+						tablet: { 
+							changePoint:768,
+							visibleItems: 3
+						}
+					}
+				});
+				
+			 });
+			</script>
+			<script type="text/javascript" src="/static/js/jquery.flexisel.js"></script>
+	</div>
+<!-- //banner-bottom -->
+<!-- banner-bottom-grids -->
+	<div class="banner-bottom-grids">
+		<div class="col-md-7 banner-bottom-grid-left animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
+			<h2>About the <span>    Dataset</span></h2>
+			<p>We make use of CITES Wildlife Trade Database from 2003 to 2016.</p>
+		</div>
+		<div class="col-md-5 banner-bottom-grid animated wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="500ms">
+			<img src="/static/images/6.jpg" alt=" " class="img-responsive" />
+			<div class="banner-bottom-grid1" style="opacity:0.9">
+				<div class="banner-bottom-grid1-pos animated wow fadeInUpBig" data-wow-duration="1000ms" data-wow-delay="500ms">
+					<h3>Three maps together reflect the role of each country. <i>New Insights (Map)</i></h3>
+				</div>
+			</div>
+		</div>
+		<div class="clearfix"> </div>
+	</div>
+
+    <div id="WorldMap" style="height:800px; width:90%" ></div>
+    <div class="banner-bottom-grids" >
+        <div id="export_map" style="height: 400px; width:50%" class = "col-md-5 banner-bottom-grid animated wow fadeInLeft animated"></div>
+        <div id="import_map" style="height: 400px; width:50%" class = "col-md-5 banner-bottom-grid animated wow fadeInRight animated"></div>
+    </div>
+
+	<div class="banner-bottom-grids">
+        <div class="clearfix"> </div>
+	</div>
+
+<!-- //banner-bottom-grids -->
+<!-- footer-top -->
+	<div class="footer-top animated wow zoomInDown" data-wow-duration="1000ms" data-wow-delay="800ms" style="opacity:0.8">
+		<div class="container">
+			<h1 style=" color:#f1b15b">Top 3 Taxons traded most is constant, two of them are crocodilian.</h1>
+            <h3 style=" font-weight:normal;color: white">To dynamically visualize the top ten frequently traded species each year.</h3>
+            <h3 style=" font-weight:normal;color: white">Please click here: <a href="http://127.0.0.1:8000/top_ten_taxons/"> Link </a></h3>
+			<div style = "height : 70px; width :100%">
+				<a href="mail.html"></a>
+			</div>
+			<div class="footer-top-image">
+				<img src="/static/images/1.png" alt=" " class="img-responsive" />
+			</div>
+		</div>
+	</div>
+<!-- //footer-top -->
+	<div class="footer animated wow bounce" data-wow-duration="1000ms" data-wow-delay="800ms" style="opacity:0.8">
+        <div class="bt">
+            <button onclick="sort(-1)">Previous Year</button>
+            <button onclick="sort(1)">Post Year</button>
+            <button onclick="sort(0)">Sort</button><br>
+        </div>
+        <div class="Top3"></div>
+
+        <div class="headfont">
+            <p id="headfont" style="color:white; font-size: 1.5em" >2003 Top 10 Trading Taxons</p>
+        </div>
+        <div id = "container"></div>
+	</div>
+
+	<div class="footer animated wow bounce" data-wow-duration="1000ms" data-wow-delay="800ms">
+		<div class="container">
+			<p>Copyright &copy; 2018.Group I All rights reserved.</p>
+		</div>
+	</div>
+
+<!-- //footer -->
+
+<!-- here stars scrolling icon -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/*
+				var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear' 
+				};
+			*/
+			getEcharts_map_live();
+            getEcharts_export();
+            getEcharts_import();
+            {#getEcharts_bar();#}
+
+        $().UItoTop({ easingType: 'easeOutQuart' });
+
+        });
+	</script>
+
+    <script src='http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js'></script>
+    <script type="text/javascript">
+        function store(s){
+            var numbers = [[10,9,8,7,6,5,4,3,2,1],
+            [2,1,3,4,6,5,7,8,9,10],
+            [1,3,2,4,5,6,7,9,8,10],
+            [1,3,2,4,6,5,7,8,9,10],
+            [2,1,3,6,5,4,7,9,8,10],
+            [2,1,3,7,4,6,5,10,9,8],
+            [2,4,1,3,5,7,6,9,8,10],
+            [5,1,4,3,2,6,7,8,9,10],
+            [1,2,4,5,3,6,7,9,8,10],
+            [3,4,2,1,5,6,7,9,10,8],
+            [2,1,4,3,5,6,7,8,9,10],
+            [1,3,2,4,5,7,6,10,9,8],
+            [3,2,1,4,6,5,7,9,8,10],
+            [2,1,4,6,3,5,7,8,9,10]];
+            var store=[];
+
+            for (var i = 0; i < 10; i++) {
+                var number = Math.floor(numbers[s][i]*5+10);
+                store.push(number);
+                var pElement = document.createElement("p");
+                var parentElement = document.getElementById("container");
+                pElement.style.left = i * 120 + i * 2 + "px";
+                pElement.style.top = 500 - 8 * number + "px";
+                pElement.style.height = 8 * number + "px";
+                pElement.setAttribute("class","box");
+                parentElement.appendChild(pElement);
+            }
+            return store;
+        }
+        count =0 ;
+        function sort(t){
+            if(t){
+                count=count+t;
+            }
+            var numbers = store(count);
+
+            var year=[2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016];
+            document.getElementById("headfont").innerHTML=year[count]+" Top 10 Trading Taxons";
+
+            var text = [["Alligator mississippiensis","Crocodylus niloticus","Python reticulatus","Varanus niloticus","Loxodonta africana","Caiman crocodilus fuscus","Crocodylus porosus","Psittacus erithacus","Python curtus","Varanus salvator"],/*2003*/
+
+            ["Python bivittatus","Varanus salvator","Python curtus","Crocodylus porosus","Caiman crocodilus fuscus","Loxodonta africana","Varanus niloticus","Python reticulatus","Crocodylus niloticus","Alligator mississippiensis"],/*2004*/
+
+            ["Macaca fascicularis","Varanus salvator","Python bivittatus","Crocodylus porosus","Loxodonta africana","Caiman crocodilus fuscus","Varanus niloticus","Python reticulatus","Crocodylus niloticus","Alligator mississippiensis"],/*2005*/
+
+            ["Macaca fascicularis","Varanus salvator","Python bivittatus","Crocodylus porosus","Loxodonta africana","Caiman crocodilus fuscus","Varanus niloticus","Crocodylus niloticus","Python reticulatus","Alligator mississippiensis"],/*2006*/
+
+            ["Macaca fascicularis","Python bivittatus","Varanus salvator","Crocodylus porosus","Caiman crocodilus fuscus","Loxodonta africana","Varanus niloticus","Crocodylus niloticus","Python reticulatus","Alligator mississippiensis"],/*2007*/
+
+            ["Python bivittatus","Macaca fascicularis","Varanus salvator","Crocodylus porosus","Caiman crocodilus fuscus","Loxodonta africana","Varanus niloticus","Crocodylus niloticus","Python reticulatus","Alligator mississippiensis"],/*2008*/
+
+            ["Macaca fascicularis","Python bivittatus","Varanus salvator","Caiman crocodilus fuscus","Varanus niloticus","Loxodonta africana","Crocodylus porosus","Alligator mississippiensis","Python reticulatus","Crocodylus niloticus"],/*2009*/
+
+            ["Python bivittatus","Varanus salvator","Caiman crocodilus fuscus","Varanus niloticus","Macaca fascicularis","Crocodylus porosus","Loxodonta africana","Alligator mississippiensis","Python reticulatus","Crocodylus niloticus"],/*2010*/
+
+            ["Varanus salvator","Macaca fascicularis","Caiman crocodilus fuscus","Python bivittatus","Varanus niloticus","Crocodylus porosus","Loxodonta africana","Python reticulatus","Alligator mississippiensis","Crocodylus niloticus"],/*2011*/
+
+            ["Varanus salvator","Macaca fascicularis","Varanus niloticus","Caiman crocodilus fuscus","Python bivittatus","Crocodylus porosus","Loxodonta africana","Alligator mississippiensis","Python reticulatus","Crocodylus niloticus"],/*2012*/
+
+            ["Caiman crocodilus fuscus","Varanus niloticus","Varanus salvator","Macaca fascicularis","Python bivittatus","Crocodylus porosus","Loxodonta africana","Crocodylus niloticus","Alligator mississippiensis","Python reticulatus"],/*2013*/
+
+            ["Varanus niloticus","Caiman crocodilus fuscus","Macaca fascicularis","Varanus salvator","Python bivittatus","Crocodylus porosus","Loxodonta africana","Crocodylus niloticus","Alligator mississippiensis","Python reticulatus"],/*2014*/
+
+            ["Acipenser baerii","Varanus niloticus","Macaca fascicularis","Varanus salvator","Python bivittatus","Loxodonta africana","Crocodylus porosus","Python reticulatus","Alligator mississippiensis","Crocodylus niloticus"],/*2015*/
+
+            ["Macaca fascicularis","Varanus niloticus","Acipenser baerii","Varanus salvator","Loxodonta africana","Python bivittatus","Crocodylus porosus","Alligator mississippiensis","Python reticulatus","Crocodylus niloticus"]/*2016*/
+            ];
+
+            var parentElement = document.getElementById("container");
+            var i = 0, j = 0;
+            var time = setInterval(function() {
+                if (i < numbers.length& count >=0) {
+                    if (j < numbers.length - i) {
+                        if (numbers[j] > numbers[j + 1]) {
+                            var temp = numbers[j];
+                            var temptext=text[count][j];
+                            numbers[j] = numbers[j + 1];
+                            text[count][j]=text[count][j+1];
+                            numbers[j + 1] = temp;
+                            text[count][j+1]=temptext;
+                            parentElement.innerHTML = "";
+                            for (var k = 0; k < numbers.length; k++) {
+                                var textNode = document.createTextNode(text[count][k]);
+                                var pElement = document.createElement("p");
+                                pElement.appendChild(textNode);
+                                pElement.style.left = k * 139 + 35+"px";
+                                pElement.style.top = 510 - 8 * numbers[k] + "px";
+                                pElement.style.width = 80 + "px";
+                                pElement.style.height = 8 * numbers[k] + "px";
+                                pElement.style.background = "#B22222";
+                                pElement.setAttribute("class","box");
+                                pElement.setAttribute("id",text[count][k]);
+                                if(document.getElementById('Python bivittatus')){
+                                    var y = document.getElementById('Python bivittatus')
+                                    y.style.background = "#00BFFF" ;
+                                }
+                                if(document.getElementById('Macaca fascicularis')){
+                                    var z = document.getElementById('Macaca fascicularis')
+                                    z.style.background = "#48D1CC" ;
+                                }
+                                if(document.getElementById('Acipenser baerii')){
+                                    var m = document.getElementById('Acipenser baerii')
+                                    m.style.background = "#FFD700" ;
+                                }
+                                parentElement.appendChild(pElement);
+                            }
+                        }
+                        j++;
+                    }
+                    else{
+                        i++;
+                        j = 0;
+                    }
+                }
+                else {
+                    clearInterval(time);
+                    return;
+                }
+            }, 200);
+            if (flag == 1 & count>=0) {
+                var x = getElementById("boxes")
+                x.remove(x.selectedIndex)
+
+                sort();
+            }
+        }
+        flag = 0;
+        sort();
+        flag = 1;
+
+    </script>
+    <script type="text/javascript">
+        function getEcharts_map_live(){
+            // Step:3 conifg ECharts's path, link to echarts.js from current page.
+            require.config({
+                paths: {
+                    echarts: 'http://echarts.baidu.com/build/dist'
+                }
+            });
+
+            // Step:4 require echarts and use it in the callback.
+            require(
+            [
+                'echarts',
+                'echarts/chart/map'
+            ],
+            function (ec) {
+                var myChart2 = ec.init(document.getElementById('WorldMap'));
+                myChart2.showLoading();
+                $.ajax({
+                    url: "/load_live_map",
+                    dataType: "json",
+
+                    success: function(data){
+                      //myChart.hideLoading();
+                      option.series[0].markPoint.data = data.markPoint;
+                      option.series[0].geoCoord = data.geo;
+                      option.series[1].markLine.data = data.line;
+                          {#[[{name: 'ANDORRA'}, {name: 'UNITED ARAB EMIRATES', value: 95}]];#}
+                          {#{"ANDORRA": [1.32, 42.31], "UNITED ARAB EMIRATES": [55.3, 25.2]};#}
+                          {#[{name:'ANDORRA', value: 95},{name:'UNITED ARAB EMIRATES', value: 96}];#}
+                      myChart2.setOption(option);
+                      myChart2.hideLoading();
+                    },
+                    error: function(msg){
+                      alert("System Error!");
+                    }
+                });
+
+                var option = {
+                    title: {
+                        text: 'Export-Import Flow Among Countries',
+                        subtext: 'Data for Each Country',
+                        x: 'left'
+                    },
+                    tooltip: {
+                        trigger: 'item'
+                    },
+                    dataRange: {
+                        min: 0,
+                        max: 100,
+                        splitList: [
+                            {start:100, end: 1000},
+                            {start: 50, end: 100},
+                            {start: 30, end: 50},
+                            {start: 15, end: 30},
+                            {start: 10, end: 15},
+                            {start: 5, end: 10},
+                            {start: 2, end: 5},
+                            {end: 2}
+                        ],
+                        calculable: false,
+                        {#color: ['#DA333D','#DE6D59','#0E6BBA','#63B8FF','#8AABA5', '#C1CDC1'],#}
+                        {#color: ['#8B1A1A','#FF4500','#FF8247','#FFC125','#6A5ACD','#4682B4','#5F9EA0', '#FFFFF0'],#}
+                        color: ['#FF6EB4','#f29c9c','#f3b59b','#f3e59a','#9fe0f6'],
+                        textStyle: {
+                            color: '#696969'
+                        }
+                    },
+                    series: [
+                        {
+                            name: 'Global',
+                            type: 'map',
+                            roam: true,
+                            hoverable: false,
+                            mapType: 'world',
+                            itemStyle: {
+                                normal: {
+                                    borderColor: 'rgba(100,149,237,1)',
+                                    borderWidth:0.5,
+                                    areaStyle: {
+                                        color: 'rgba(0,0,0,0.7)',
+                                        color: '#1b1b1b'
+                                    }
+                                }
+                            },
+                            data: [],
+                            markLine: {
+                                smooth: true,
+                                symbol: ['none', 'circle'],
+                                symbolSize: 1,
+                                itemStyle: {
+                                    normal: {
+                                        color: '#fff',
+                                        borderWidth: 1,
+                                        borderColor: 'rgba(30,144,255,0.5)'
+                                    }
+                                },
+                                data: [],
+                            },
+                            geoCoord: {
+                                    {#"CANADA": [-105.42, 56.43],#}
+                                    {#"UNITED STATES OF AMERICA": [-77.02, 39.91]#}
+                            },
+                            markPoint: {
+                                symbol: 'emptyCircle',
+                                symbolSize: function (v) {
+                                    return 10 + v / 100
+                                },
+                                effect: {
+                                    show: true,
+                                    shadowBlur: 0
+                                },
+                                itemStyle: {
+                                    normal: {
+                                        label: {show: false}
+                                    },
+                                    emphasis: {
+                                        label: {position: 'top'}
+                                    }
+                                },
+                                data:[
+
+                                ]
+                            }
+                        },
+                        {
+                            name: 'Trade Amount',
+                            type: 'map',
+                            mapType: 'world',
+                            data:[],
+                            markLine: {
+                                smooth: true,
+                                effect: {
+                                    show: true,
+                                    scaleSize: 1,
+                                    period: 30,
+                                    color: '#fff',
+                                    shadowBlur: 10
+                                },
+                                itemStyle: {
+                                    normal: {
+                                        label: {show: false},
+                                        borderWidth: 1,
+                                        lineStyle: {
+                                            type: 'solid',
+                                            shadowBlur: 10
+                                        }
+                                    }
+                                },
+                                data:[
+                                    {#[{name: 'CANADA'}, {name: 'UNITED STATES OF AMERICA', value: 910}],#}
+                                    {#[{name: 'AUSTRALIA'}, {name: 'UNITED STATES OF AMERICA', value: 425}],#}
+                                    {#[{name: 'BRAZIL'}, {name: 'GERMANY', value: 291}],#}
+                                    {#[{name: 'ARGENTINA'}, {name: 'UNITED STATES OF AMERICA', value: 130}],#}
+                                    {#[{name: 'CANADA'}, {name: 'FRANCE', value: 125}],#}
+                                    {#[{name: 'BELGIUM'}, {name: 'SWITZERLAND', value: 113}],#}
+                                    {#[{name: 'AUSTRALIA'}, {name: 'GERMANY', value: 110}],#}
+                                    {#[{name: 'BELGIUM'}, {name: 'UNITED STATES OF AMERICA', value: 106}],#}
+                                    {#[{name: 'CANADA'}, {name: 'CHINA', value: 92}],#}
+                                    {#[{name: 'CANADA'}, {name: 'GERMANY', value: 87}]#}
+                                ]
+                            },
+                            markPoint: {
+                                symbol: 'emptyCircle',
+                                symbolSize: function (v) {
+                                    return 0.1
+                                },
+                                effect: {
+                                    show: false,
+                                    shadowBlur: 0
+                                },
+                                itemStyle: {
+                                    normal: {
+                                        label: {
+                                            show: true,
+                                            position: 'top',
+                                            textStyle: {
+                                                fontSize: 14
+                                            }
+                                        }
+                                    },
+                                    emphasis: {
+                                        label: {show: false}
+                                    }
+                                },
+                                data: [
+                                    {#{name: 'CANADA', value: 910},#}
+                                    {#{name: 'AUSTRALIA', value: 425},#}
+                                    {#{name: 'BRAZIL', value: 291},#}
+                                    {#{name: 'ARGENTINA', value: 130},#}
+                                    {#{name: 'CANADA', value: 125},#}
+                                    {#{name: 'BELGIUM', value: 113},#}
+                                    {#{name: 'AUSTRALIA', value: 110},#}
+                                    {#{name: 'BELGIUM', value: 106},#}
+                                    {#{name: 'CANADA', value: 92},#}
+                                    {#{name: 'CANADA', value: 87}#}
+                                ]
+                            }
+                        }
+                    ]
+                };
+            });
+        }
+        function getEcharts_export() {
+            require.config({
+                paths: {
+                    echarts: 'http://echarts.baidu.com/build/dist'
+                }
+            });
+
+            require(
+            [
+                'echarts',
+                'echarts/chart/map'
+            ],
+            function (ec) {
+                var myChart_map = ec.init(document.getElementById('export_map'));
+
+                myChart_map.showLoading();
+                $.ajax({
+                    url: "/load_export_map",
+                    dataType: "json",
+
+                    success: function (data) {
+                        //myChart.hideLoading();
+                        option.series[0].data = data;
+                        myChart_map.setOption(option);
+                        myChart_map.hideLoading();
+                    },
+                    error: function (msg) {
+                        alert("System Error!");
+                    }
+                });
+
+
+                var itemStyle = {
+                    normal: {
+                        label: {
+                            show: true,
+                            formatter: '{b}',
+                            textStyle: {fontSize: 20, fontWeight: 'bold'}
+                        }
+                    },
+                    emphasis: {label: {show: true}}
+                };
+
+                var option = {
+                    title: {
+                        text: 'Export Volume of Endangered Species',
+                        subtext: 'Data for each country',
+                        x: 'left'
+                    },
+                    tooltip: {
+                        trigger: 'item'
+                    },
+                    dataRange: {
+                        min: 0,
+                        max: 7250,
+                        x: 'left',
+                        y: 'bottom',
+                        text: ['Higher', 'Lower'],
+                        calculable: true,
+                        color: ['#2E8B57','#F0FFF0']
+                    },
+                    toolbox: {
+                        show: true,
+                        orient: 'vertical',
+                        x: 'right',
+                        y: 'center',
+                        feature: {
+                            mark: {show: true},
+                            dataView: {show: true, readOnly: false},
+                            restore: {show: true},
+                            saveAsImage: {show: true}
+                        }
+                    },
+                    roamController: {
+                        show: true,
+                        x: 'right',
+                        width :50,
+                        hright : 0,
+                        padding: 0,
+                        handleColor:'#558B57',
+                        mapTypeControl: {
+                            'world': true
+                        }
+                    },
+                    series: [
+                        {
+                            name: 'Total Amount of Export Trade',
+                            type: 'map',
+                            mapType: 'world',
+                            itemStyle: {
+                                normal: {label: {show: false}},
+                                emphasis: {label: {show: true}}
+                            },
+                        },
+
+                    ]
+                };
+            }
+            );
+        }
+        function getEcharts_import() {
+            require.config({
+                paths: {
+                    echarts: 'http://echarts.baidu.com/build/dist'
+                }
+            });
+
+            require(
+            [
+                'echarts',
+                'echarts/chart/map'
+            ],
+            function (ec) {
+                var myChart_map = ec.init(document.getElementById('import_map'));
+
+                myChart_map.showLoading();
+                $.ajax({
+                    url: "/load_import_map",
+                    dataType: "json",
+
+                    success: function (data) {
+                        //myChart.hideLoading();
+                        option.series[0].data = data;
+                        myChart_map.setOption(option);
+                        myChart_map.hideLoading();
+                    },
+                    error: function (msg) {
+                        alert("System Error!");
+                    }
+                });
+
+
+                var itemStyle = {
+                    normal: {
+                        label: {
+                            show: true,
+                            formatter: '{b}',
+                            textStyle: {fontSize: 20, fontWeight: 'bold' }
+                        }
+                    },
+                    emphasis: {label: {show: true}}
+                };
+
+                var option = {
+                    title: {
+                        text: 'Import Volume of Endangered Species',
+                        subtext: 'Data for each country',
+                        x: 'left'
+                    },
+                    tooltip: {
+                        trigger: 'item'
+                    },
+                    dataRange: {
+                        min: 0,
+                        max: 11131,
+                        x: 'left',
+                        y: 'bottom',
+                        text: ['Higher', 'Lower'],
+                        calculable: true,
+                        color:['#FF8C00','#FAEBD7']
+                    },
+                    toolbox: {
+                        show: true,
+                        orient: 'vertical',
+                        x: 'right',
+                        y: 'center',
+                        feature: {
+                            mark: {show: true},
+                            dataView: {show: true, readOnly: false},
+                            restore: {show: true},
+                            saveAsImage: {show: true}
+                        }
+                    },
+                    roamController: {
+                        show: true,
+                        x: 'right',
+                        width :50,
+                        hright : 0,
+                        padding: 0,
+                        handleColor:'#CD853F',
+                        mapTypeControl: {
+                            'world': true
+                        }
+                    },
+                    series: [
+                        {
+                            name: 'Total Amount of Import Trade',
+                            type: 'map',
+                            mapType: 'world',
+                            itemStyle: {
+                                normal: {label: {show: false}},
+                                emphasis: {label: {show: true}}
+                            },
+                        },
+
+                    ]
+                };
+            }
+            );
+        }
+
+    </script>
+<!-- //here ends scrolling icon -->
+</body>
+</html>
